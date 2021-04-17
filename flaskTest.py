@@ -9,6 +9,10 @@ def home():
 @app.route("/salvador")
 def salvador():
     return "Hello, Salvador"
+
+@app.route("/bootstrapTest")
+def bootstrapTest():
+    return render_template("bootstrapTest.html")
     
 if __name__ == "__main__":
     app.run(debug=True)
