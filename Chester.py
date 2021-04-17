@@ -6,7 +6,7 @@ import time
 import sys
 import paramiko
 import random_FEN
-
+import cv_cmods
 
 def move_piece(move):
     letter = move[0:1]
@@ -48,10 +48,21 @@ def move_piece(move):
 def calculate_fen_position():
     #TODO Move extruder to where the picture needs to be taken from, take the picture, run opencv analysis, and convert to FEN
     print("Taking a look at the board...")
-    ser.write(b'G1 X95 Y60\r\n')     
-    time.sleep(2)
     ser.write(b'G1 Z25\r\n')     #Move the Z axis up and out of the way of the pieces
-    time.sleep(1)
+    time.sleep(2)
+    ser.write(b'G1 X60 Y40\r\n')     
+    take_picture()
+    time.sleep(3)
+    ser.write(b'G1 X140 Y40\r\n')     
+    take_picture()
+    time.sleep(3)
+    ser.write(b'G1 X140 Y100\r\n')     
+    take_picture()
+    time.sleep(3)
+    ser.write(b'G1 X60 Y100\r\n')     
+    take_picture()
+    time.sleep(3)
+
     print("Analyzing...")
     #Insert opencv magic here
     
