@@ -61,7 +61,18 @@
       <p>Lorem ipsum dolor sit ame.</p>
       <ul class="nav nav-pills flex-column">
         <li class="nav-item">
-          <a class="nav-link active" href="#">Reset Game</a>
+          <a id = "resetButton" class="nav-link active" href="#">Reset Game</a>
+		  <script> 
+			var el = document.getElementById('resetButton');
+			el.onclick = resetGame;
+
+
+			function resetGame() {
+				alert("Reset request sent!");
+				return false;
+			}
+			
+		  </script>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Something Else</a>
@@ -75,9 +86,11 @@
     <div class="col-sm-5">
       <h2>Interactive Chess Board</h2>
       <h5>Drag and drop to move pieces</h5>
-        <div class="fakeimg">
-          <img style = "width:100%" src = "/static/board.png">
-        </div>
+        <div>
+          <img style = "width:100%" src = "static/board.png">
+          <img style = "width:50px;position: absolute;TOP:92px ; LEFT:192px" src = "static/B_king.png">
+          <img style = "width:50px;position: absolute;TOP:92px ; LEFT:40px" src = "static/B_rook.png">
+		</div>
       <p>Some text..</p>
       <br>
       <h2>AI Classifier Cam:</h2>
