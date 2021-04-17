@@ -4,3 +4,5 @@ WHAT EACH FILE DOES:
 	- open.py -- open the servo
 	- stockfish -- test for stockfish AI
 	- video_streaming.py -- simple webpage which streams video
+	- Chester.py -- Master file for controlling the robot with gcode and interfacing with the raspi for servo operation, also stockfish
+	
