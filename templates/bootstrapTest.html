@@ -61,7 +61,18 @@
       <p>Lorem ipsum dolor sit ame.</p>
       <ul class="nav nav-pills flex-column">
         <li class="nav-item">
-          <a class="nav-link active" href="#">Reset Game</a>
+          <a id = "resetButton" class="nav-link active" href="#">Reset Game</a>
+		  <script> 
+			var el = document.getElementById('resetButton');
+			el.onclick = resetGame;
+
+
+			function resetGame() {
+				alert("Reset request sent!");
+				return false;
+			}
+			
+		  </script>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Something Else</a>
@@ -75,10 +86,15 @@
     <div class="col-sm-5">
       <h2>Interactive Chess Board</h2>
       <h5>Drag and drop to move pieces</h5>
+<<<<<<< HEAD
         <div >
           <img style = "width:100%" src = "board.png">
           <img style = "width:50px;position: absolute;TOP:92px ; LEFT:192px" src = "chess_pieces/B_king.png">
           <img style = "width:50px;position: absolute;TOP:92px ; LEFT:40px" src = "chess_pieces/B_rook.png">
+=======
+        <div class="fakeimg">
+          <img style = "width:100%" src = "/static/board.png">
+>>>>>>> 1d9ebea59949f5aa7423791bd09d24f50f868896
         </div>
       <p>Some text..</p>
       <br>
