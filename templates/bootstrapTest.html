@@ -61,7 +61,18 @@
       <p>Lorem ipsum dolor sit ame.</p>
       <ul class="nav nav-pills flex-column">
         <li class="nav-item">
-          <a class="nav-link active" href="#">Reset Game</a>
+          <a id = "resetButton" class="nav-link active" href="#">Reset Game</a>
+		  <script> 
+			var el = document.getElementById('resetButton');
+			el.onclick = resetGame;
+
+
+			function resetGame() {
+				alert("Reset request sent!");
+				return false;
+			}
+			
+		  </script>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Something Else</a>
