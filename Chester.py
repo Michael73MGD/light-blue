@@ -48,8 +48,10 @@ def move_piece(move):
 def calculate_fen_position():
     #TODO Move extruder to where the picture needs to be taken from, take the picture, run opencv analysis, and convert to FEN
     print("Taking a look at the board...")
-    ser.write(b'G1 X95 Y95\r\n')     
-    time.sleep(3)
+    ser.write(b'G1 X95 Y60\r\n')     
+    time.sleep(2)
+    ser.write(b'G1 Z25\r\n')     #Move the Z axis up and out of the way of the pieces
+    time.sleep(1)
     print("Analyzing...")
     #Insert opencv magic here
     
