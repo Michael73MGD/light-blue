@@ -1,0 +1,6 @@
+WHAT EACH FILE DOES:
+
+	- close.py -- rapsberry pi closes the servo
+	- open.py -- open the servo
+	- stockfish -- test for stockfish AI
+	- video_streaming.py -- simple webpage which streams video
