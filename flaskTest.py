@@ -10,7 +10,7 @@ def home():
 def salvador():
     return "Hello, Salvador"
 
-@app.route("/bootstrapTest")
+@app.route("/chester")
 def bootstrapTest():
     return render_template("bootstrapTest.html")
     
