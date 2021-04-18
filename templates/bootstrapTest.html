@@ -5,6 +5,8 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
 <html lang="en">
@@ -13,6 +15,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -79,29 +83,31 @@
 			<h2>Interactive Chess Board</h2>
 			<h5>Drag and drop to move pieces</h5>
         </div>
-		<div id = "board">
+		<div id = "board" >
 			<!-- Board and init peice locations -->
-			<img style = "width:100%" src = "static/board.png">
+			<img style = "width:100%" draggable='false' src = "static/board.png">
+      <img  draggable = "true"  id = "test" style = "width:50px;	position: absolute;	TOP:300px; 	LEFT:200px" 		src = "static/B_rook.png">
 				<!-- Row One -->
-				<img  class="piece" 	draggable = "true" 	id = "B_rook_L" 	style = "width:50px;	position: absolute;	TOP:92px; 	LEFT:40px" 		src = "static/B_rook.png">
-				<img  class="piece" 	draggable = "true" 	id = "B_knight_L" 	style = "width:50px;	position: absolute;	TOP:92px; 	LEFT:90px" 		src = "static/B_knight.png">
-				<img  class="piece" 	draggable = "true" 	id = "B_bishop_L" 	style = "width:50px;	position: absolute;	TOP:92px; 	LEFT:141px" 	src = "static/B_bishop.png">	
-				<img  class="piece" 	draggable = "true" 	id = "B_queen"	 	style = "width:50px;	position: absolute;	TOP:92px; 	LEFT:191px" 	src = "static/B_queen.png">		
-				<img  class="piece" 	draggable = "true" 	id = "B_king" 		style = "width:50px;	position: absolute;	TOP:92px; 	LEFT:242px" 	src = "static/B_king.png">		
-				<img  class="piece" 	draggable = "true" 	id = "B_bishop_R" 	style = "width:50px;	position: absolute;	TOP:92px; 	LEFT:292px" 	src = "static/B_bishop.png">	
-				<img  class="piece" 	draggable = "true" 	id = "B_knight_R" 	style = "width:50px;	position: absolute;	TOP:92px; 	LEFT:343px" 	src = "static/B_knight.png">
-				<img  class="piece" 	draggable = "true" 	id = "B_rook_R" 	style = "width:50px;	position: absolute;	TOP:92px; 	LEFT:394px" 	src = "static/B_rook.png">		
+				<img  draggable = "true"  id = "B_rook_L" style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:40px" 		src = "static/B_rook.png">
+				<img  class="draggable" 	draggable = "true" 	id = "B_knight_L" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:90px" 		src = "static/B_knight.png">
+				<img  class="draggable" 	draggable = "true" 	id = "B_bishop_L" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:141px" 	src = "static/B_bishop.png">	
+				<img  class="draggable" 	draggable = "true" 	id = "B_queen"	 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:191px" 	src = "static/B_queen.png">		
+				<img  class="draggable" 	draggable = "true" 	id = "B_king" 		style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:242px" 	src = "static/B_king.png">		
+				<img  class="draggable" 	draggable = "true" 	id = "B_bishop_R" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:292px" 	src = "static/B_bishop.png">	
+				<img  class="draggable" 	draggable = "true" 	id = "B_knight_R" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:343px" 	src = "static/B_knight.png">
+				<img  class="draggable" 	draggable = "true" 	id = "B_rook_R" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:394px" 	src = "static/B_rook.png">		
 				
 				<!-- Row Two -->
-				<img class="piece" 	id = "B_pawn_1" 	style = "width:50px;	position: absolute;	TOP:440px; 	LEFT:20px" 		src = "static/B_pawn.png">
-				<img class="piece" 	id = "B_pawn_2" 	style = "width:50px;	position: absolute;	TOP:86px; 	LEFT:20px" 		src = "static/B_pawn.png">
-				<img class="piece" 	id = "B_pawn_3" 	style = "width:50px;	position: absolute;	TOP:92px; 	LEFT:141px" 	src = "static/B_pawn.png">	
-				<img class="piece" 	id = "B_pawn_4" 	style = "width:50px;	position: absolute;	TOP:92px; 	LEFT:191px" 	src = "static/B_pawn.png">		
-				<img class="piece" 	id = "B_pawn_5" 	style = "width:50px;	position: absolute;	TOP:92px; 	LEFT:242px" 	src = "static/B_pawn.png">		
-				<img class="piece" 	id = "B_pawn_6" 	style = "width:50px;	position: absolute;	TOP:92px; 	LEFT:292px" 	src = "static/B_pawn.png">	
-				<img class="piece" 	id = "B_pawn_7" 	style = "width:50px;	position: absolute;	TOP:92px; 	LEFT:343px" 	src = "static/B_pawn.png">
-				<img class="piece" 	id = "B_pawn_8" 	style = "width:50px;	position: absolute;	TOP:444px; 	LEFT:394px" 	src = "static/B_pawn.png">	
+				<img class="piece" 	id = "B_pawn_1" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:440px; 	LEFT:20px" 		src = "static/B_pawn.png">
+				<img class="piece" 	id = "B_pawn_2" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:86px; 	LEFT:20px" 		src = "static/B_pawn.png">
+				<img class="piece" 	id = "B_pawn_3" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:141px" 	src = "static/B_pawn.png">	
+				<img class="piece" 	id = "B_pawn_4" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:191px" 	src = "static/B_pawn.png">		
+				<img class="piece" 	id = "B_pawn_5" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:242px" 	src = "static/B_pawn.png">		
+				<img class="piece" 	id = "B_pawn_6" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:292px" 	src = "static/B_pawn.png">	
+				<img class="piece" 	id = "B_pawn_7" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:343px" 	src = "static/B_pawn.png">
+				<img class="piece" 	id = "B_pawn_8" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:444px; 	LEFT:394px" 	src = "static/B_pawn.png">	
 		</div>
+    <div id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" style = "width:100px;height:100px">DROP ZONE</div>
 		<div style = "display:none">
       <p>Some text..</p>
       <br>
@@ -126,7 +132,10 @@
 
 
   <!-- Script time -->
-  <script> 
+  <script>
+
+
+
     document.getElementById('resetButton').onclick = resetGame;
 	
     function resetGame() {
@@ -228,4 +237,38 @@
 		}
 	}
 
-    </script>
+
+
+
+
+
+  function dragover_handler(ev) {
+    ev.preventDefault();
+    ev.dataTransfer.dropEffect = "move";
+  }
+  function drop_handler(ev) {
+    ev.preventDefault();
+    // Get the id of the target and add the moved element to the target's DOM
+    const data = ev.dataTransfer.getData("text/plain");
+    console.log(ev.target)
+    moveDiv = document.getElementById(data)
+    moveDiv.style = 'width:50px'
+    ev.target.appendChild(moveDiv);
+  }
+
+
+  function dragstart_handler(ev) {
+    // Add the target element's id to the data transfer object
+    ev.dataTransfer.setData("text/plain", ev.target.id);
+    ev.dataTransfer.setData("text/html", ev.target.outerHTML);
+    ev.dataTransfer.setData("text/uri-list", ev.target.ownerDocument.location.href);
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    // Get the element by id
+    const element = document.getElementById("test");
+    // Add the ondragstart event listener
+    element.addEventListener("dragstart", dragstart_handler);
+  });
+
+  </script>
