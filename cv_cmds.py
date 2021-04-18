@@ -1,8 +1,7 @@
 import cv2 as cv
 import numpy as np
-import socket
 import sys 
-import urllib
+import urllib.request
 
 def take_picture():
     img_url = "http://192.168.1.34:8000/stream.mjpg"
@@ -14,11 +13,12 @@ def take_picture():
         a = bytes.find(b'\xff\xd8')
         b = bytes.find(b'\xff\xd9')
         if a != -1 and b != -1:
+            print("snap!")
             jpg = bytes[a:b+2]
             bytes = bytes[b+2:]
-            frame = cv.imdecode(np.fromstring(jpg, dtype=np.uint8), cv.IMREAD_COLOR)
-            frame = undistort(frame)
-            cv.imwrite("cv_test/frame.jpg", frame)
+            frame = cv.imdecode(np.frombuffer(jpg, dtype=np.uint8), cv.IMREAD_COLOR)
+            #frame = undistort(frame)
+            #cv.imwrite("cv_test/frame.jpg", frame)
             return frame
 
 
