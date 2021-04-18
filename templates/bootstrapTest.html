@@ -244,13 +244,14 @@
 	var specialWhiteIDs = ["W_rook_L", "W_knight_L", "W_bishop_L", "W_queen", "W_king", "W_bishop_R", "W_knight_R", "W_rook_R"];
 	for (var i = 0; i < specialBlackIDs.length; i++) {
 		chessboardInit(specialBlackIDs[i], positionsX[i], positionsY[0], 1);
-		//chessboardInit(specialWhiteIDs[i], positionsX[i], );
+		chessboardInit(specialWhiteIDs[i], positionsX[i], positionsY[7], 3);
 	}
 	
 	var pawnBlackIDs = ["B_pawn_1", "B_pawn_2", "B_pawn_3", "B_pawn_4", "B_pawn_5", "B_pawn_6", "B_pawn_7", "B_pawn_8"];
 	var pawnWhiteIDs = ["W_pawn_1", "W_pawn_2", "W_pawn_3", "W_pawn_4", "W_pawn_5", "W_pawn_6", "W_pawn_7", "W_pawn_8"];
 	for (var i = 0; i < pawnBlackIDs.length; i++) {
 		chessboardInit(pawnBlackIDs[i], positionsX[i], positionsY[1], 0);
+		chessboardInit(pawnWhiteIDs[i], positionsX[i], positionsY[6], 4);
 	}
 
 	function chessboardInit(divName, Xposition, Yposition, firstRow) {
@@ -265,7 +266,7 @@
 			//div.style.top = strPosY;
 			div.style.zIndex = 2;
 		}
-		else {
+		else if (firstRow == 0){
 			//console.log("converting: " + divName + " " + positionsX[i]);
 			var posx = Math.ceil(Xposition).toFixed();
 			var posy = Math.ceil(Yposition).toFixed();
@@ -274,6 +275,28 @@
 			var strPosY = posy + "px";
 			//div.style.left = strPosX;
 			//div.style.top = strPosY;
+			div.style.zIndex = 2;
+		}
+		else if (firstRow == 3) {
+			//console.log("converting: " + divName + " " + positionsX[i]);
+			var posx = Math.ceil(Xposition).toFixed();
+			var posy = Math.ceil(Yposition).toFixed();
+			var div = document.getElementById(divName);
+			var strPosX = posx + "px";
+			var strPosY = posy + "px";
+			div.style.left = strPosX;
+			div.style.top = strPosY;
+			div.style.zIndex = 2;
+		}
+		else if (firstRow == 4) {
+			//console.log("converting: " + divName + " " + positionsX[i]);
+			var posx = Math.ceil(Xposition).toFixed();
+			var posy = Math.ceil(Yposition).toFixed();
+			var div = document.getElementById(divName);
+			var strPosX = posx + "px";
+			var strPosY = posy + "px";
+			div.style.left = strPosX;
+			div.style.top = strPosY;
 			div.style.zIndex = 2;
 		}
 	}
@@ -670,7 +693,7 @@
 	
 	//-------------------------------------------------------END OF Finding and encoding the board starting position-------------------------------------------------------
 
-	fenStrOG = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+	fenStrOG = "rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R";
 	
 	var tmp = fenStrOG.split('/');
 	for (var i = 0; i < tmp.length; i++) {
@@ -731,6 +754,8 @@
 		else {
 			str = str + id;
 			console.log(str + " Row: " + rows + " Col: " + col + " Letter: " + letter + " rCnt: " + rCnt)
+			
+			//ROOK
 			if (letter == "r") {
 				if (rCnt == 0) {
 					console.log("moving rook LEFT to " + str);
@@ -749,6 +774,26 @@
 					tmp.appendChild(thing);
 				}
 			}
+			else if (letter == "R") {
+				if (rCnt == 0) {
+					console.log("moving rook LEFT to " + str);
+					tmp = document.getElementById(str);
+					thing = document.getElementById("W_rook_L");
+					thing.style = "width:51px";
+					tmp.appendChild(thing);
+					rCnt = rCnt + 1;
+					//console.log("rook moved to " + str)
+				}
+				else {
+					console.log("moving rook RIGHT to " + str);
+					tmp = document.getElementById(str);
+					thing = document.getElementById("W_rook_R");
+					thing.style = "width:51px";
+					tmp.appendChild(thing);
+				}
+			}
+			
+			//KNIGHTS
 			else if (letter == "n") {
 				if (nCnt == 0) {
 					console.log("moving knight LEFT to " + str);
@@ -766,6 +811,25 @@
 					tmp.appendChild(thing);
 				}
 			}
+			else if (letter == "N") {
+				if (nCnt == 0) {
+					console.log("moving knight LEFT to " + str);
+					tmp = document.getElementById(str);
+					thing = document.getElementById("W_knight_L");
+					thing.style = "width:51px";
+					tmp.appendChild(thing);
+					nCnt++;
+				}
+				else {
+					console.log("moving knight RIGHT to " + str);
+					tmp = document.getElementById(str);
+					thing = document.getElementById("W_knight_R");
+					thing.style = "width:51px";
+					tmp.appendChild(thing);
+				}
+			}
+			
+			//BISHOPS
 			else if (letter == "b") {
 				if (bCnt == 0) {
 					console.log("moving bishop LEFT to " + str);
@@ -783,6 +847,25 @@
 					tmp.appendChild(thing);
 				}
 			}
+			else if (letter == "B") {
+				if (bCnt == 0) {
+					console.log("moving bishop LEFT to " + str);
+					tmp = document.getElementById(str);
+					thing = document.getElementById("W_bishop_L");
+					thing.style = "width:51px";
+					tmp.appendChild(thing);
+					bCnt++;
+				}
+				else {
+					console.log("moving bishop RIGHT to " + str);
+					tmp = document.getElementById(str);
+					thing = document.getElementById("W_bishop_R");
+					thing.style = "width:51px";
+					tmp.appendChild(thing);
+				}
+			}
+			
+			//QUEENS
 			else if (letter == "q") {
 				console.log("moving queen to " + str);
 				tmp = document.getElementById(str);
@@ -790,6 +873,15 @@
 				thing.style = "width:51px";
 				tmp.appendChild(thing);
 			}
+			else if (letter == "Q") {
+				console.log("moving queen to " + str);
+				tmp = document.getElementById(str);
+				thing = document.getElementById("W_queen");
+				thing.style = "width:51px";
+				tmp.appendChild(thing);
+			}
+			
+			//KING
 			else if (letter == "k") {
 				console.log("moving king to " + str);
 				tmp = document.getElementById(str);
@@ -797,6 +889,18 @@
 				thing.style = "width:51px";
 				tmp.appendChild(thing);
 			}
+			else if (letter == "K") {
+				console.log("moving king to " + str);
+				tmp = document.getElementById(str);
+				thing = document.getElementById("W_king");
+				thing.style = "width:51px";
+				tmp.appendChild(thing);
+			}
+			
+			
+			
+			
+			//PAWNS
 			else if (letter == "p") {
 				console.log("moving pawn to " + str);
 				if (pCnt == 0) {
@@ -806,6 +910,7 @@
 					tmp.appendChild(thing);
 					pCnt++;
 				}
+				
 				else if (pCnt == 1) {
 					tmp = document.getElementById(str);
 					thing = document.getElementById("B_pawn_2");
@@ -813,6 +918,7 @@
 					tmp.appendChild(thing);
 					pCnt++;
 				}
+				
 				else if (pCnt == 2) {
 					tmp = document.getElementById(str);
 					thing = document.getElementById("B_pawn_3");
@@ -820,6 +926,7 @@
 					tmp.appendChild(thing);
 					pCnt++;
 				}
+				
 				else if (pCnt == 3) {
 					tmp = document.getElementById(str);
 					thing = document.getElementById("B_pawn_4");
@@ -827,6 +934,7 @@
 					tmp.appendChild(thing);
 					pCnt++;
 				}
+				
 				else if (pCnt == 4) {
 					tmp = document.getElementById(str);
 					thing = document.getElementById("B_pawn_5");
@@ -834,6 +942,7 @@
 					tmp.appendChild(thing);
 					pCnt++;
 				}
+				
 				else if (pCnt == 5) {
 					tmp = document.getElementById(str);
 					thing = document.getElementById("B_pawn_6");
@@ -841,6 +950,7 @@
 					tmp.appendChild(thing);
 					pCnt++;
 				}
+				
 				else if (pCnt == 6) {
 					tmp = document.getElementById(str);
 					thing = document.getElementById("B_pawn_7");
@@ -848,9 +958,77 @@
 					tmp.appendChild(thing);
 					pCnt++;
 				}
+				
 				else if (pCnt == 7) {
 					tmp = document.getElementById(str);
 					thing = document.getElementById("B_pawn_8");
+					thing.style = "width:51px";
+					tmp.appendChild(thing);
+				}
+				
+			}
+			
+			else if (letter == "P") {
+				console.log("moving pawn to " + str);
+				if (pCnt == 0) {
+					tmp = document.getElementById(str);
+					thing = document.getElementById("W_pawn_1");
+					thing.style = "width:51px";
+					tmp.appendChild(thing);
+					pCnt++;
+				}
+				
+				else if (pCnt == 1) {
+					tmp = document.getElementById(str);
+					thing = document.getElementById("W_pawn_2");
+					thing.style = "width:51px";
+					tmp.appendChild(thing);
+					pCnt++;
+				}
+				
+				else if (pCnt == 2) {
+					tmp = document.getElementById(str);
+					thing = document.getElementById("W_pawn_3");
+					thing.style = "width:51px";
+					tmp.appendChild(thing);
+					pCnt++;
+				}
+				
+				else if (pCnt == 3) {
+					tmp = document.getElementById(str);
+					thing = document.getElementById("W_pawn_4");
+					thing.style = "width:51px";
+					tmp.appendChild(thing);
+					pCnt++;
+				}
+				
+				else if (pCnt == 4) {
+					tmp = document.getElementById(str);
+					thing = document.getElementById("W_pawn_5");
+					thing.style = "width:51px";
+					tmp.appendChild(thing);
+					pCnt++;
+				}
+				
+				else if (pCnt == 5) {
+					tmp = document.getElementById(str);
+					thing = document.getElementById("W_pawn_6");
+					thing.style = "width:51px";
+					tmp.appendChild(thing);
+					pCnt++;
+				}
+				
+				else if (pCnt == 6) {
+					tmp = document.getElementById(str);
+					thing = document.getElementById("W_pawn_7");
+					thing.style = "width:51px";
+					tmp.appendChild(thing);
+					pCnt++;
+				}
+				
+				else if (pCnt == 7) {
+					tmp = document.getElementById(str);
+					thing = document.getElementById("W_pawn_8");
 					thing.style = "width:51px";
 					tmp.appendChild(thing);
 				}
