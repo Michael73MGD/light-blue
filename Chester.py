@@ -12,6 +12,7 @@ import cv2 as cv
 import numpy as np
 import signal
 import math
+import io
 
 class Chester:
     x = 0
@@ -19,7 +20,7 @@ class Chester:
     z = 15
     ser = None
     grab_height = 0
-    move_height = 20
+    move_height = 40
     vision_height = 80
     normal_speed = 2750 #typical feedrate for moving
     z_speed = 4000 #feedrate for movement
@@ -48,7 +49,7 @@ class Chester:
         }
 
     piece_color_dict = {
-        'king':[(75, 60, 50), (100, 160, 150)],
+        'king':[(75, 70, 50), (100, 160, 150)],
         'queen':[(105, 130, 130), (115, 190, 190)],
         'bishop':[(170, 70, 20), (185, 170, 120)],
         'knight':[(15, 90, 120), (30, 170, 195)],
@@ -118,9 +119,9 @@ class Chester:
         if(letter == 't'):
             x_pos = 0
         else:
-            x_pos = (self.letterDictionary[letter]-1)*self.square_size+self.x_offset
+            x_pos = ((self.letterDictionary[letter]-1))*self.square_size+self.x_offset
         
-        y_pos = (int(number)-1)*self.square_size+self.y_offset
+        y_pos = (7-(int(number)-1))*self.square_size+self.y_offset
 
 
         self.move_to_xy(x_pos, y_pos)
@@ -144,12 +145,12 @@ class Chester:
 
         self.move_to_z(self.move_height)
 
-        pieces_array = self.pieces_to_arr(pieces)
+        arr = self.pieces_to_arr(pieces)
+        FEN = self.arr_to_FEN(arr)
 
         #Insert opencv magic here
         
-        FEN = random_FEN.start() #For testing
-        return [FEN, pieces_array]
+        return FEN, pieces
         #example FEN (starting position): "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 
     def pieces_to_arr(self, pieces):
@@ -167,8 +168,29 @@ class Chester:
                 arr[i,j] = arr[i,j].upper()
             
         
-        print(arr)
         return arr
+
+    def arr_to_FEN(self, arr):
+        # Use StringIO to build string more efficiently than concatenating
+        with io.StringIO() as s:
+            for row in arr:
+                empty = 0
+                for cell in row:
+                    if cell != '':
+                        if empty > 0:
+                            s.write(str(empty))
+                            empty = 0
+                        s.write(cell)
+                    else:
+                        empty += 1
+                if empty > 0:
+                    s.write(str(empty))
+                s.write('/')
+            # Move one position back to overwrite last '/'
+            s.seek(s.tell() - 1)
+            # If you do not have the additional information choose what to put
+            s.write(' w - - 0 1')
+            return s.getvalue()
 
     
     def get_img_pieces(self, imgs):
@@ -266,6 +288,7 @@ class Chester:
         letter = int((center[1]-x_offset)/square_size)
         return (letter, number)
     
+    @staticmethod
     def get_legal_moves(fen_state):
         stockfish.set_fen_position(fen_state)
         stockfish._put("go perft 1")
@@ -277,7 +300,7 @@ class Chester:
             else:
                 move = l[0:4]
                 legal_moves += [str(move)]
-                    return True
+                return True
         return legal_moves
 
 
