@@ -64,6 +64,8 @@ def calculate_fen_position():
     time.sleep(3)
 
     print("Analyzing...")
+    ser.write(b'G1 Z15\r\n')   
+    time.sleep(2)
     #Insert opencv magic here
     
     FEN = random_FEN.start() #For testing
