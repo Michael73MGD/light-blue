@@ -350,7 +350,18 @@
 		const B_bishop_R = document.getElementById("B_bishop_R");
 		const B_knight_R = document.getElementById("B_knight_R");
 		const B_rook_R = document.getElementById("B_rook_R");
-		// Add the ondragstart event listener
+		
+		// All black pawns.
+		const B_pawn_1 = document.getElementById("B_pawn_1");
+		const B_pawn_2 = document.getElementById("B_pawn_2");
+		const B_pawn_3 = document.getElementById("B_pawn_3");
+		const B_pawn_4 = document.getElementById("B_pawn_4");
+		const B_pawn_5 = document.getElementById("B_pawn_5");
+		const B_pawn_6 = document.getElementById("B_pawn_6");
+		const B_pawn_7 = document.getElementById("B_pawn_7");
+		const B_pawn_8 = document.getElementById("B_pawn_8");
+		
+		// Add the ondragstart event listener for special black pieces
 		B_rook_L.addEventListener("dragstart", dragstart_handler);
 		B_knight_L.addEventListener("dragstart", dragstart_handler);
 		B_bishop_L.addEventListener("dragstart", dragstart_handler);
@@ -359,6 +370,16 @@
 		B_bishop_R.addEventListener("dragstart", dragstart_handler);
 		B_knight_R.addEventListener("dragstart", dragstart_handler);
 		B_rook_R.addEventListener("dragstart", dragstart_handler);
+		
+		// Add the ondragstart event listener for black pawns
+		B_pawn_1.addEventListener("dragstart", dragstart_handler);
+		B_pawn_2.addEventListener("dragstart", dragstart_handler);
+		B_pawn_3.addEventListener("dragstart", dragstart_handler);
+		B_pawn_4.addEventListener("dragstart", dragstart_handler);
+		B_pawn_5.addEventListener("dragstart", dragstart_handler);
+		B_pawn_6.addEventListener("dragstart", dragstart_handler);
+		B_pawn_7.addEventListener("dragstart", dragstart_handler);
+		B_pawn_8.addEventListener("dragstart", dragstart_handler);
 		
 	});
 
