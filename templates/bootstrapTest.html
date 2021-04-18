@@ -109,8 +109,12 @@
 				<img class="piece" 	id = "B_pawn_7" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:343px" 	src = "static/B_pawn.png">
 				<img class="piece" 	id = "B_pawn_8" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:444px; 	LEFT:394px" 	src = "static/B_pawn.png">	
 				
-			<div id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" style = "position:absolute; width:40px;height:40px; TOP:150px; 	LEFT:300px"><b>DROP ZONE</b></div>
+			
+			<!--
+			<div id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" style = "position:absolute; width:51px;height:51px; TOP:146px; 	LEFT:40px"><b>DROP ZONE</b></div>
+			
 			<div id="target2" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" style = "position:absolute; width:40px;height:40px; TOP:150px; 	LEFT:200px"><b>DROP ZONE</b></div>
+			-->
 		</div>
 		<div style = "display:none">
       <p>Some text..</p>
@@ -158,6 +162,8 @@
     
 	
 	
+	//-------------------------------------------------------init board positions-------------------------------------------------------
+	
 	// coordinates of TOP LEFT (x, y) == 30, 86
 	// coordinates of BOTTOM RIGHT (x, y) == 387, 440
 	function mid(a, b) {
@@ -184,15 +190,19 @@
 	var h2 = mid(c2, g2)
 	var i2 = mid(g2, b2)
 	
-	var positionsX = [a, e, d, f, c, h, g, i, b];
-	for (var i = 0; i < positionsX.length; i++) {
-		positionsX[i] = normalizeX(positionsX[i]);
-		//console.log(positionsX[i]);
+	var positionsPreX = [a, e, d, f, c, h, g, i, b];
+	var positionsX = [0, 0, 0, 0, 0, 0, 0, 0];
+	console.log("X POSITIONS:");
+	for (var i = 0; i < positionsPreX.length-1; i++) {
+		positionsX[i] = normalizeX(positionsPreX[i]);
+		console.log(positionsX[i]);
 	}
 	
-	var positionsY = [a2, e2, d2, f2, c2, h2, g2, i2, b2];
-	for (var i = 0; i < positionsY.length; i++) {
-		positionsY[i] = normalizeY(positionsY[i]);
+	var positionsPreY = [a2, e2, d2, f2, c2, h2, g2, i2, b2];
+	var positionsY = [0, 0, 0, 0, 0, 0, 0, 0];
+	console.log("Y POSITIONS:");
+	for (var i = 0; i < positionsPreY.length-1; i++) {
+		positionsY[i] = normalizeY(positionsPreY[i]);
 		console.log(positionsY[i]);
 	}
 
@@ -220,7 +230,7 @@
 
 	function chessboardInit(divName, Xposition, Yposition, firstRow) {
 		if (firstRow == 1) {
-			console.log("converting: " + divName + " " + positionsX[i]);
+			//console.log("converting: " + divName + " " + positionsX[i]);
 			var posx = Math.ceil(Xposition).toFixed();
 			var posy = Math.ceil(Yposition).toFixed();
 			var div = document.getElementById(divName);
@@ -228,9 +238,10 @@
 			var strPosY = posy + "px";
 			div.style.left = strPosX;
 			div.style.top = strPosY;
+			div.style.zIndex = 2;
 		}
 		else {
-			console.log("converting: " + divName + " " + positionsX[i]);
+			//console.log("converting: " + divName + " " + positionsX[i]);
 			var posx = Math.ceil(Xposition).toFixed();
 			var posy = Math.ceil(Yposition).toFixed();
 			var div = document.getElementById(divName);
@@ -238,12 +249,73 @@
 			var strPosY = posy + "px";
 			div.style.left = strPosX;
 			div.style.top = strPosY;
+			div.style.zIndex = 2;
 		}
 	}
+	
+	//-------------------------------------------------------END OF init board positions-------------------------------------------------------
 
+	//-------------------------------------------------------Setting possible move squares-------------------------------------------------------
 
+	//TOP:146px; 	LEFT:40px
+	//ondrop="drop_handler(event)" ondragover="dragover_handler(event)"
+	
+	var totalDivsCounter = 0;
+	for (var i = 0; i < positionsY.length; i++) {
+	
+		for (var j = 0; j < positionsX.length; j++) {
+		
+			var divName = divNameGenerator(totalDivsCounter);
+			totalDivsCounter = totalDivsCounter + 1;
+			console.log(divName);
+			possibleMovesInit(divName, positionsX[j], positionsY[i]);
+		
+		}
+	
+	}
+	totalDivsCounter = 0;
+	
+	function divNameGenerator(totalDivsCounter) {
+		var str = "divStack";
+		var newStr = str + totalDivsCounter;
+		return newStr;
+	}
+	
+	// initializes all divs meant to handle 
+	function possibleMovesInit(divName, Xposition, Yposition) {
+		//console.log("converting: " + divName + " " + positionsX[i]);
+		var posx = Math.ceil(Xposition).toFixed();
+		var posy = Math.ceil(Yposition).toFixed();
+		var strPosX = posx + "px";
+		var strPosY = posy + "px";
+		createDiv(divName, strPosX, strPosY);
+	}
+	
+	//createDiv("meme", "40px", "146px");
+	// takes in a name for the div, to be procedurally generrated.
+	// they will be labeled in the following way:
+	//	1 2 3
+	//  4 5 6
+	//	7 8 9
+	function createDiv(divName, xPosition, yPosition) {
+		var div = document.createElement("div");
+		//div.innerHTML = "<b>DROP</b>";
+		div.id = divName;
+		div.style.position = "absolute";
+		div.style.width = "51px";
+		div.style.height = "51px";
+		div.style.top = yPosition;
+		div.style.left = xPosition;
+		div.style.zIndex = 1;
+		div.setAttribute("ondrop", "drop_handler(event)"); 
+		div.setAttribute("ondragover", "dragover_handler(event)"); 
 
-
+		document.getElementById("board").appendChild(div);
+	}
+	
+	
+	
+	
 
 
 	function dragover_handler(ev) {
