@@ -6,9 +6,9 @@ app = Flask(__name__)
 def home():
     return render_template("home.html")
 
-@app.route("/salvador")
+@app.route("/move")
 def salvador():
-    return "Hello, Salvador"
+    return render_template("movingTest.html")
 
 @app.route("/chester")
 def bootstrapTest():
