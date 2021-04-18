@@ -144,12 +144,12 @@ class Chester:
 
         self.move_to_z(self.move_height)
 
-        self.pieces_to_arr(pieces)
+        pieces_array = self.pieces_to_arr(pieces)
 
         #Insert opencv magic here
         
         FEN = random_FEN.start() #For testing
-        return FEN
+        return [FEN, pieces_array]
         #example FEN (starting position): "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 
     def pieces_to_arr(self, pieces):

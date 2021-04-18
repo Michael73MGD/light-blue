@@ -36,7 +36,7 @@ signal.signal(signal.SIGINT, signal_handler)
 #Assumes that chessboard is 8x8" and that z height is set so the claw can pick up pieces 
 player = input("Would you like to play white or black pieces? (Type w or b)")
 print("Standby...")
-current = chester.calculate_fen_position()        #This takes a picture and analyzes it, then generates the fen position of the board and returns it as a string
+current = chester.calculate_fen_position()[0]        #This takes a picture and analyzes it, then generates the fen position of the board and returns it as a string
 print(current)
 # while True:
 #     move = input("Enter a square to move to: ")
