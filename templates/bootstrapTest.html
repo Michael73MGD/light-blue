@@ -108,6 +108,27 @@
 				<img class="piece" 	id = "B_pawn_7" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:343000px" 	src = "static/B_pawn.png">
 				<img class="piece" 	id = "B_pawn_8" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:444px; 	LEFT:394000px" 	src = "static/B_pawn.png">	
 				
+				
+				
+				
+				<img  class="draggable"		draggable = "true"  id = "W_rook_L" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:400000px" 		src = "static/W_rook.png">
+				<img  class="draggable" 	draggable = "true" 	id = "W_knight_L" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:900000px" 		src = "static/W_knight.png">
+				<img  class="draggable" 	draggable = "true" 	id = "W_bishop_L" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:1410000px" 	src = "static/W_bishop.png">	
+				<img  class="draggable" 	draggable = "true" 	id = "W_queen"	 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:191000px" 	src = "static/W_queen.png">		
+				<img  class="draggable" 	draggable = "true" 	id = "W_king" 		style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:242000px" 	src = "static/W_king.png">		
+				<img  class="draggable" 	draggable = "true" 	id = "W_bishop_R" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:292000px" 	src = "static/W_bishop.png">	
+				<img  class="draggable" 	draggable = "true" 	id = "W_knight_R" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:343000px" 	src = "static/W_knight.png">
+				<img  class="draggable" 	draggable = "true" 	id = "W_rook_R" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:394000px" 	src = "static/W_rook.png">		
+				
+				<!-- Row Two -->
+				<img class="piece" 	id = "W_pawn_1" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:440px; 	LEFT:20000px" 		src = "static/W_pawn.png">
+				<img class="piece" 	id = "W_pawn_2" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:86px; 	LEFT:20000px" 		src = "static/W_pawn.png">
+				<img class="piece" 	id = "W_pawn_3" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:141000px" 	src = "static/W_pawn.png">	
+				<img class="piece" 	id = "W_pawn_4" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:191000px" 	src = "static/W_pawn.png">		
+				<img class="piece" 	id = "W_pawn_5" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:242000px" 	src = "static/W_pawn.png">		
+				<img class="piece" 	id = "W_pawn_6" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:292000px" 	src = "static/W_pawn.png">	
+				<img class="piece" 	id = "W_pawn_7" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:343000px" 	src = "static/W_pawn.png">
+				<img class="piece" 	id = "W_pawn_8" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:444px; 	LEFT:394000px" 	src = "static/W_pawn.png">	
 			
 			<!--
 			<div id="target" ondrop="drop_handler(event)" ondragover="dragover_handler(event)" style = "position:absolute; width:51px;height:51px; TOP:146px; 	LEFT:40px"><b>DROP ZONE</b></div>
@@ -220,11 +241,14 @@
 	}
 
 	var specialBlackIDs = ["B_rook_L", "B_knight_L", "B_bishop_L", "B_queen", "B_king", "B_bishop_R", "B_knight_R", "B_rook_R"];
+	var specialWhiteIDs = ["W_rook_L", "W_knight_L", "W_bishop_L", "W_queen", "W_king", "W_bishop_R", "W_knight_R", "W_rook_R"];
 	for (var i = 0; i < specialBlackIDs.length; i++) {
 		chessboardInit(specialBlackIDs[i], positionsX[i], positionsY[0], 1);
+		//chessboardInit(specialWhiteIDs[i], positionsX[i], );
 	}
 	
 	var pawnBlackIDs = ["B_pawn_1", "B_pawn_2", "B_pawn_3", "B_pawn_4", "B_pawn_5", "B_pawn_6", "B_pawn_7", "B_pawn_8"];
+	var pawnWhiteIDs = ["W_pawn_1", "W_pawn_2", "W_pawn_3", "W_pawn_4", "W_pawn_5", "W_pawn_6", "W_pawn_7", "W_pawn_8"];
 	for (var i = 0; i < pawnBlackIDs.length; i++) {
 		chessboardInit(pawnBlackIDs[i], positionsX[i], positionsY[1], 0);
 	}
@@ -237,8 +261,8 @@
 			var div = document.getElementById(divName);
 			var strPosX = posx + "px";
 			var strPosY = posy + "px";
-			div.style.left = strPosX;
-			div.style.top = strPosY;
+			//div.style.left = strPosX;
+			//div.style.top = strPosY;
 			div.style.zIndex = 2;
 		}
 		else {
@@ -248,8 +272,8 @@
 			var div = document.getElementById(divName);
 			var strPosX = posx + "px";
 			var strPosY = posy + "px";
-			div.style.left = strPosX;
-			div.style.top = strPosY;
+			//div.style.left = strPosX;
+			//div.style.top = strPosY;
 			div.style.zIndex = 2;
 		}
 	}
@@ -353,8 +377,8 @@
 		console.log("ORIGINAL HORIZONTAL DIVSTACK NUMBER " + computeNearestDivstackY(originCoordY));
 		console.log("NEW  HORIZONTAL DIVSTACK NUMBER " + computeNearestDivstackY(endCoordY));
 		
-		convertToCoordinates(originCoordX, originCoordY, endCoordX, endCoordY);
-		
+		var array = convertToCoordinates(computeNearestDivstackX(originCoordX), computeNearestDivstackY(originCoordY), computeNearestDivstackX(endCoordX), computeNearestDivstackY(endCoordY));
+		console.log(array[0][0] + " " + array[0][1] + " " + array[1][0] + " " + array[1][1]);
 	}
 
 	function dragstart_handler(ev) {
@@ -405,6 +429,48 @@
 		B_pawn_6.addEventListener("dragstart", dragstart_handler);
 		B_pawn_7.addEventListener("dragstart", dragstart_handler);
 		B_pawn_8.addEventListener("dragstart", dragstart_handler);
+		
+		
+		
+		// all special white peieces
+		const W_rook_L = document.getElementById("W_rook_L");
+		const W_knight_L = document.getElementById("W_knight_L");
+		const W_bishop_L = document.getElementById("W_bishop_L");
+		const W_queen = document.getElementById("W_queen");
+		const W_king = document.getElementById("W_king");
+		const W_bishop_R = document.getElementById("W_bishop_R");
+		const W_knight_R = document.getElementById("W_knight_R");
+		const W_rook_R = document.getElementById("W_rook_R");
+		
+		// All WHITE pawns.
+		const W_pawn_1 = document.getElementById("W_pawn_1");
+		const W_pawn_2 = document.getElementById("W_pawn_2");
+		const W_pawn_3 = document.getElementById("W_pawn_3");
+		const W_pawn_4 = document.getElementById("W_pawn_4");
+		const W_pawn_5 = document.getElementById("W_pawn_5");
+		const W_pawn_6 = document.getElementById("W_pawn_6");
+		const W_pawn_7 = document.getElementById("W_pawn_7");
+		const W_pawn_8 = document.getElementById("W_pawn_8");
+		
+		// Add the ondragstart event listener for special black pieces
+		W_rook_L.addEventListener("dragstart", dragstart_handler);
+		W_knight_L.addEventListener("dragstart", dragstart_handler);
+		W_bishop_L.addEventListener("dragstart", dragstart_handler);
+		W_queen.addEventListener("dragstart", dragstart_handler);
+		W_king.addEventListener("dragstart", dragstart_handler);
+		W_bishop_R.addEventListener("dragstart", dragstart_handler);
+		W_knight_R.addEventListener("dragstart", dragstart_handler);
+		W_rook_R.addEventListener("dragstart", dragstart_handler);
+		
+		// Add the ondragstart event listener for black pawns
+		W_pawn_1.addEventListener("dragstart", dragstart_handler);
+		W_pawn_2.addEventListener("dragstart", dragstart_handler);
+		W_pawn_3.addEventListener("dragstart", dragstart_handler);
+		W_pawn_4.addEventListener("dragstart", dragstart_handler);
+		W_pawn_5.addEventListener("dragstart", dragstart_handler);
+		W_pawn_6.addEventListener("dragstart", dragstart_handler);
+		W_pawn_7.addEventListener("dragstart", dragstart_handler);
+		W_pawn_8.addEventListener("dragstart", dragstart_handler);
 		
 	});
 	
@@ -604,7 +670,7 @@
 	
 	//-------------------------------------------------------END OF Finding and encoding the board starting position-------------------------------------------------------
 
-	fenStrOG = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR";
+	fenStrOG = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 	
 	var tmp = fenStrOG.split('/');
 	for (var i = 0; i < tmp.length; i++) {
