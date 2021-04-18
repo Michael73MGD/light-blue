@@ -6,7 +6,7 @@ import sys
 #ser.write(b'G\r\n')
 #time.sleep(1)
 
-ser = serial.Serial('/dev/ttyACM0', 115200)
+ser = serial.Serial('/dev/ttyACM1', 115200)
 amt = sys.argv[1]
 time.sleep(2)
 print("hi")
