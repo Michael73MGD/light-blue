@@ -103,7 +103,7 @@ green = [(75, 60, 50), (100, 160, 150)]
 
 
 
-img = cv.imread("cntr2.jpg")
+img = cv.imread("Q1.jpg")
 hsv = cv.cvtColor(img, cv.COLOR_BGR2HSV)
 mask = cv.inRange(hsv, S_mask[0], S_mask[1])
 img = cv.bitwise_and(hsv, hsv, mask=mask)
