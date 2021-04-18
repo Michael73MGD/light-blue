@@ -401,7 +401,11 @@
 		console.log("NEW  HORIZONTAL DIVSTACK NUMBER " + computeNearestDivstackY(endCoordY));
 		
 		var array = convertToCoordinates(computeNearestDivstackX(originCoordX), computeNearestDivstackY(originCoordY), computeNearestDivstackX(endCoordX), computeNearestDivstackY(endCoordY));
-		console.log(array[0][0] + " " + array[0][1] + " " + array[1][0] + " " + array[1][1]);
+		var output = array[0][0] + " " + array[0][1] + " " + array[1][0] + " " + array[1][1];
+		console.log(output);
+		//$.post( "/postmethod", {
+    	//	javascript_data: output 
+    	//});
 	}
 
 	function dragstart_handler(ev) {
