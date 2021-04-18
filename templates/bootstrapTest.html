@@ -80,49 +80,40 @@
 			<h5>Drag and drop to move pieces</h5>
         </div>
 		<div id = "board">
+			<!-- Board and init peice locations -->
 			<img style = "width:100%" src = "static/board.png">
-			<script>
-				boardWidth = document.getElementById("board").offsetWidth;
-				console.log(boardWidth);
+				<!-- Row One -->
+				<img  class="piece" 	draggable = "true" 	id = "B_rook_L" 	style = "width:50px;	position: absolute;	TOP:92px; 	LEFT:40px" 		src = "static/B_rook.png">
+				<img  class="piece" 	draggable = "true" 	id = "B_knight_L" 	style = "width:50px;	position: absolute;	TOP:92px; 	LEFT:90px" 		src = "static/B_knight.png">
+				<img  class="piece" 	draggable = "true" 	id = "B_bishop_L" 	style = "width:50px;	position: absolute;	TOP:92px; 	LEFT:141px" 	src = "static/B_bishop.png">	
+				<img  class="piece" 	draggable = "true" 	id = "B_queen"	 	style = "width:50px;	position: absolute;	TOP:92px; 	LEFT:191px" 	src = "static/B_queen.png">		
+				<img  class="piece" 	draggable = "true" 	id = "B_king" 		style = "width:50px;	position: absolute;	TOP:92px; 	LEFT:242px" 	src = "static/B_king.png">		
+				<img  class="piece" 	draggable = "true" 	id = "B_bishop_R" 	style = "width:50px;	position: absolute;	TOP:92px; 	LEFT:292px" 	src = "static/B_bishop.png">	
+				<img  class="piece" 	draggable = "true" 	id = "B_knight_R" 	style = "width:50px;	position: absolute;	TOP:92px; 	LEFT:343px" 	src = "static/B_knight.png">
+				<img  class="piece" 	draggable = "true" 	id = "B_rook_R" 	style = "width:50px;	position: absolute;	TOP:92px; 	LEFT:394px" 	src = "static/B_rook.png">		
 				
-				// coordinates of TOP LEFT (x, y) == 30, 86
-				// coordinates of BOTTOM RIGHT (x, y) == 405, 455
-				function mid(a, b) {
-					return (a + b) / 2
-				}
-				
-				var a = 30
-				var b = 405
-				var c = mid(a, b)
-				var d = mid(a, c)
-				var e = mid(a, d)
-				var f = mid(d, c)
-				var g = mid(c, b)
-				var h = mid(c, g)
-				var i = mid(g, b)
-
-				console.log(a + 24.4375, 1.075 * e + 24.4375, 1.075 * d + 24.4375, 1.075 * f + 24.4375, 1.075 * c + 24.4375,1.075 * h + 24.4375, 1.075 * g + 24.4375, 1.075 * i + 24.4375, 1.075 * b + 24.4375)
-			</script>
-			<img id = "B_rook_L" style = "width:50px;position: absolute;TOP:455px ; LEFT:44.43px" src = "static/B_rook.png">
-			<img id = "B_rook_L" style = "width:50px;position: absolute;TOP:455px ; LEFT:82px" src = "static/B_rook.png">
-			<img id = "B_rook_L" style = "width:50px;position: absolute;TOP:455px ; LEFT:499px" src = "static/B_rook.png">
-			<!--
-			<img style = "width:50px;position: absolute;TOP:92px ; LEFT:90px" src = "static/B_knight.png">
-			<img style = "width:50px;position: absolute;TOP:92px ; LEFT:141px" src = "static/B_bishop.png">
-			<img style = "width:50px;position: absolute;TOP:92px ; LEFT:191px" src = "static/B_queen.png">
-			img style = "width:50px;position: absolute;TOP:92px ; LEFT:242px" src = "static/B_king.png">
-			<img style = "width:50px;position: absolute;TOP:92px ; LEFT:292px" src = "static/B_bishop.png">
-			<img style = "width:50px;position: absolute;TOP:92px ; LEFT:343px" src = "static/B_knight.png">
-			<img style = "width:50px;position: absolute;TOP:92px ; LEFT:394px" src = "static/B_rook.png">
-			-->
+				<!-- Row Two -->
+				<img class="piece" 	id = "B_pawn_1" 	style = "width:50px;	position: absolute;	TOP:440px; 	LEFT:20px" 		src = "static/B_pawn.png">
+				<img class="piece" 	id = "B_pawn_2" 	style = "width:50px;	position: absolute;	TOP:86px; 	LEFT:20px" 		src = "static/B_pawn.png">
+				<img class="piece" 	id = "B_pawn_3" 	style = "width:50px;	position: absolute;	TOP:92px; 	LEFT:141px" 	src = "static/B_pawn.png">	
+				<img class="piece" 	id = "B_pawn_4" 	style = "width:50px;	position: absolute;	TOP:92px; 	LEFT:191px" 	src = "static/B_pawn.png">		
+				<img class="piece" 	id = "B_pawn_5" 	style = "width:50px;	position: absolute;	TOP:92px; 	LEFT:242px" 	src = "static/B_pawn.png">		
+				<img class="piece" 	id = "B_pawn_6" 	style = "width:50px;	position: absolute;	TOP:92px; 	LEFT:292px" 	src = "static/B_pawn.png">	
+				<img class="piece" 	id = "B_pawn_7" 	style = "width:50px;	position: absolute;	TOP:92px; 	LEFT:343px" 	src = "static/B_pawn.png">
+				<img class="piece" 	id = "B_pawn_8" 	style = "width:50px;	position: absolute;	TOP:444px; 	LEFT:394px" 	src = "static/B_pawn.png">	
 		</div>
-		
+		<div style = "display:none">
       <p>Some text..</p>
       <br>
       <h2>AI Classifier Cam:</h2>
       <h5>Look at him go!</h5>
       <div class="fakeimg">Fake Image</div>
-      <p>Chester is very smart. He uses OpenCV to see the chess peices and uses Stockfish to compute the next best move. Better play smart! He's set to hard mode :)</p>    </div>
+      <p>Chester is very smart. He uses OpenCV to see the chess peices and uses Stockfish to compute the next best move. Better play smart! He's set to hard mode :)</p> 
+    </div>
+    <div id = 'terminal'>
+      <h2>Program Output
+      <hr>
+    </div>
   </div>
 </div>
 
@@ -137,10 +128,11 @@
   <!-- Script time -->
   <script> 
     document.getElementById('resetButton').onclick = resetGame;
+	
     function resetGame() {
       alert("Reset request sent!");
       return false;
-    }
+    };
 
     terminal = document.getElementById('terminal');
     function new_message(){
@@ -148,10 +140,92 @@
       var message = document.createTextNode('test');
       paragraph.appendChild(message);
       terminal.appendChild(paragraph);
-    }
-    new_message();
+    };
+    //new_message();
     
+	
+	
+	// coordinates of TOP LEFT (x, y) == 30, 86
+	// coordinates of BOTTOM RIGHT (x, y) == 387, 440
+	function mid(a, b) {
+		return (a + b) / 2
+	};
+	
+	var a = 30
+	var b = 387
+	var c = mid(a, b)
+	var d = mid(a, c)
+	var e = mid(a, d)
+	var f = mid(d, c)
+	var g = mid(c, b)
+	var h = mid(c, g)
+	var i = mid(g, b)
+	
+	var a2 = 86
+	var b2 = 440
+	var c2 = mid(a2, b2)
+	var d2 = mid(a2, c2)
+	var e2 = mid(a2, d2)
+	var f2 = mid(d2, c2)
+	var g2 = mid(c2, b2)
+	var h2 = mid(c2, g2)
+	var i2 = mid(g2, b2)
+	
+	var positionsX = [a, e, d, f, c, h, g, i, b];
+	for (var i = 0; i < positionsX.length; i++) {
+		positionsX[i] = normalizeX(positionsX[i]);
+		//console.log(positionsX[i]);
+	}
+	
+	var positionsY = [a2, e2, d2, f2, c2, h2, g2, i2, b2];
+	for (var i = 0; i < positionsY.length; i++) {
+		positionsY[i] = normalizeY(positionsY[i]);
+		console.log(positionsY[i]);
+	}
 
+	function normalizeX(coordinate) {
+		var scalar = 1.14;
+		var shift = 5;
+		return coordinate * scalar + shift;
+	}
+	
+	function normalizeY(coordinate) {
+		var scalar = 1.12;
+		var shift = 0;
+		return coordinate * scalar + shift;
+	}
 
+	var specialBlackIDs = ["B_rook_L", "B_knight_L", "B_bishop_L", "B_queen", "B_king", "B_bishop_R", "B_knight_R", "B_rook_R"];
+	for (var i = 0; i < specialBlackIDs.length; i++) {
+		chessboardInit(specialBlackIDs[i], positionsX[i], positionsY[0], 1);
+	}
+	
+	var pawnBlackIDs = ["B_pawn_1", "B_pawn_2", "B_pawn_3", "B_pawn_4", "B_pawn_5", "B_pawn_6", "B_pawn_7", "B_pawn_8"];
+	for (var i = 0; i < pawnBlackIDs.length; i++) {
+		chessboardInit(pawnBlackIDs[i], positionsX[i], positionsY[1], 0);
+	}
+
+	function chessboardInit(divName, Xposition, Yposition, firstRow) {
+		if (firstRow == 1) {
+			console.log("converting: " + divName + " " + positionsX[i]);
+			var posx = Math.ceil(Xposition).toFixed();
+			var posy = Math.ceil(Yposition).toFixed();
+			var div = document.getElementById(divName);
+			var strPosX = posx + "px";
+			var strPosY = posy + "px";
+			div.style.left = strPosX;
+			div.style.top = strPosY;
+		}
+		else {
+			console.log("converting: " + divName + " " + positionsX[i]);
+			var posx = Math.ceil(Xposition).toFixed();
+			var posy = Math.ceil(Yposition).toFixed();
+			var div = document.getElementById(divName);
+			var strPosX = posx + "px";
+			var strPosY = posy + "px";
+			div.style.left = strPosX;
+			div.style.top = strPosY;
+		}
+	}
 
     </script>
