@@ -20,9 +20,13 @@ potential_moves = []  #An array of strings of legal moves (ex. ["a4e4"])
 
 #On my laptop, port is '/dev/ttyACM0'
 #On my desktop, using wsl, port should be '/dev/ttyS#' (where # is the COM port) but I can't get it to work, but setting it to tty# let's it run if you just wanna test
-ser = serial.Serial('/dev/ttyACM0', 115200)
+ser = serial.Serial('/dev/ttyACM1', 115200)
+
+
 
 chester = Chester(ser)
+
+Chester.check_legal_move("rnbqkbnr/ppp1pppp/8/3p4/4P3/8/PPPP1PPP/RNBQKBNR w KQkq d6 0 2", "e4")
 
 def signal_handler(sig, frame):
     chester.drop_piece()
@@ -34,9 +38,22 @@ def signal_handler(sig, frame):
 signal.signal(signal.SIGINT, signal_handler)
 
 #Assumes that chessboard is 8x8" and that z height is set so the claw can pick up pieces 
-input("Make your first move, then press enter")
-print("Standby...")
 
+# while True:
+    # move = input("Enter a square to move to: ")
+    # if(move == "grab"):
+    #     chester.grab_piece()
+    # elif(move == "drop"):
+    #     chester.drop_piece()
+    # else:
+    #     chester.move_square(move)
+
+input("Make your first move, then press Enter")
+# else:
+#     print("I'm making my first move")
+#     time.sleep(10)
+#     chester.move_piece("d2d4")
+#     input("Make your move, then press Enter")
 
 winner = False      #Need to check if there's a winner after each move and if so: break the loop
 while(not winner):
