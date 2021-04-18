@@ -1,6 +1,6 @@
 #You must run this with: sudo -E python3 Chester.py
 from stockfish import Stockfish         #Check AI.py for info on this \/
-stockfish = Stockfish("/home/michael/Desktop/light-blue/stockfish_20090216_x64",parameters={"Threads": 2})
+stockfish = Stockfish("stockfish_20090216_x64",parameters={"Threads": 2})
 import serial   #Confusingly, the package for this is pySerial not serial
 import time
 import sys
