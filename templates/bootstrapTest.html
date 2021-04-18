@@ -313,6 +313,11 @@
 		document.getElementById("board").appendChild(div);
 	}
 	
+	//-------------------------------------------------------END OF Setting possible move squares-------------------------------------------------------
+	
+	//-------------------------------------------------------Finding and encoding the board starting position-------------------------------------------------------
+	
+	
 	
 	
 	
@@ -328,8 +333,14 @@
 		const data = ev.dataTransfer.getData("text/plain");
 		console.log(ev.target)
 		moveDiv = document.getElementById(data)
+		originCoordX = moveDiv.style.left;
+		originCoordY = moveDiv.style.top;
+		console.log("Original X: " + originCoordX + " Original Y: " + originCoordY);
 		moveDiv.style = 'width:50px'
 		ev.target.appendChild(moveDiv);
+		endCoordX = ev.target.style.left;
+		endCoordY = ev.target.style.top;
+		console.log("New X: " + endCoordX + " New Y: " + endCoordY);
 	}
 
 	function dragstart_handler(ev) {
