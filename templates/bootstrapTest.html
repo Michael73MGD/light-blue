@@ -88,9 +88,11 @@
 		<div id = "board" >
 			<!-- Board and init peice locations -->
 			<img style = "width:100%" draggable='false' src = "static/board.png">
+				<!--
 				<img  						draggable = "true"  id = "test" 		style = "width:50px;				position: absolute;	TOP:300px; 	LEFT:200px" 	src = "static/B_rook.png">
+				-->
 				<!-- Row One -->
-				<img  						draggable = "true"  id = "B_rook_L" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:40px" 		src = "static/B_rook.png">
+				<img  class="draggable"		draggable = "true"  id = "B_rook_L" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:40px" 		src = "static/B_rook.png">
 				<img  class="draggable" 	draggable = "true" 	id = "B_knight_L" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:90px" 		src = "static/B_knight.png">
 				<img  class="draggable" 	draggable = "true" 	id = "B_bishop_L" 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:141px" 	src = "static/B_bishop.png">	
 				<img  class="draggable" 	draggable = "true" 	id = "B_queen"	 	style = "cursor:grab; width:50px;	position: absolute;	TOP:92px; 	LEFT:191px" 	src = "static/B_queen.png">		
@@ -170,6 +172,7 @@
 		return (a + b) / 2
 	};
 	
+	// horizontal
 	var a = 30
 	var b = 387
 	var c = mid(a, b)
@@ -180,6 +183,7 @@
 	var h = mid(c, g)
 	var i = mid(g, b)
 	
+	// vertical
 	var a2 = 86
 	var b2 = 440
 	var c2 = mid(a2, b2)
@@ -316,12 +320,6 @@
 	//-------------------------------------------------------END OF Setting possible move squares-------------------------------------------------------
 	
 	//-------------------------------------------------------Finding and encoding the board starting position-------------------------------------------------------
-	
-	
-	
-	
-	
-
 
 	function dragover_handler(ev) {
 		ev.preventDefault();
@@ -393,5 +391,175 @@
 		B_pawn_8.addEventListener("dragstart", dragstart_handler);
 		
 	});
+	
+	//-------------------------------------------------------END OF Finding and encoding the board starting position-------------------------------------------------------
+
+	fenStrOG = "rnPqkbnr/pppppppp/8/8/8/8/PPPPPPPb/RNBQKBNR";
+	
+	var tmp = fenStrOG.split('/');
+	for (var i = 0; i < tmp.length; i++) {
+	//	console.log(tmp[i].length);
+	}
+	
+	printFen(fenStrOG);
+	
+	// traverses fen
+	function printFen(fenStr) {
+		
+		fenLevels = fenStr.split('/');
+		
+		for (var rows = 0; rows < fenLevels.length; rows++) {
+			//console.log(fenLevels[i]);
+			for (var col = 0; col < fenLevels[rows].length; col++) {
+			
+				//console.log(fenLevels[rows].charAt(col));
+				Map(rows, col, fenLevels[rows].charAt(col));
+			
+			}
+			
+			//console.log("NEW WORD!")
+			
+		}
+		
+	}
+	
+	var rCnt = 0;
+	var nCnt = 0;
+	var bCnt = 0;
+	var pCnt = 0;
+	
+	// maps index position to board position for character.
+	function Map(rows, col, letter) {
+	
+		//specialBlackIDs	all unique things
+		//pawnBlackIDs		all uniqu pawns
+		
+		str = "divStack";
+		id = 8 * rows + col;
+		str = str + id;
+		
+		console.log(str + " Row: " + rows + " Col: " + col)
+		
+		if (letter == "r") {
+			if (rCnt == 0) {
+				tmp = document.getElementById(str);
+				thing = document.getElementById("B_rook_L");
+				thing.style = "width:51px";
+				tmp.appendChild(thing);
+				rCnt++;
+				//console.log("rook moved to " + str)
+			}
+			else {
+				tmp = document.getElementById(str);
+				thing = document.getElementById("B_rook_R");
+				thing.style = "width:51px";
+				tmp.appendChild(thing);
+			}
+		}
+		else if (letter == "n") {
+			if (nCnt == 0) {
+				tmp = document.getElementById(str);
+				thing = document.getElementById("B_knight_L");
+				thing.style = "width:51px";
+				tmp.appendChild(thing);
+				nCnt++;
+			}
+			else {
+				tmp = document.getElementById(str);
+				thing = document.getElementById("B_knight_R");
+				thing.style = "width:51px";
+				tmp.appendChild(thing);
+			}
+		}
+		else if (letter == "b") {
+			if (bCnt == 0) {
+				tmp = document.getElementById(str);
+				thing = document.getElementById("B_bishop_L");
+				thing.style = "width:51px";
+				tmp.appendChild(thing);
+				bCnt++;
+			}
+			else {
+				tmp = document.getElementById(str);
+				thing = document.getElementById("B_bishop_R");
+				thing.style = "width:51px";
+				tmp.appendChild(thing);
+			}
+		}
+		else if (letter == "q") {
+			tmp = document.getElementById(str);
+			thing = document.getElementById("B_queen");
+			thing.style = "width:51px";
+			tmp.appendChild(thing);
+		}
+		else if (letter == "k") {
+			tmp = document.getElementById(str);
+			thing = document.getElementById("B_king");
+			thing.style = "width:51px";
+			tmp.appendChild(thing);
+		}
+		else if (letter == "p") {
+			if (pCnt == 0) {
+				tmp = document.getElementById(str);
+				thing = document.getElementById("B_pawn_1");
+				thing.style = "width:51px";
+				tmp.appendChild(thing);
+			}
+			
+		}
+	
+	}
+	
+	var tmp = convertIndexToPixel(2, 0);
+	console.log("X coord: " + tmp[1] + " Y coord: " + tmp[0]);
+	
+	// convert index to pixel values
+	function convertIndexToPixel(rows, col) {
+		
+		var X = positionsX[col];
+		var Y = positionsY[rows];
+		
+		var pixelPositionsYX = [];
+		pixelPositionsYX[0] = Y;
+		pixelPositionsYX[1] = X;
+		
+		return pixelPositionsYX;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
   </script>
