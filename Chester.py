@@ -194,6 +194,20 @@ class Chester:
         number = 3-int((center[0]-y_offset)/square_size)
         letter = int((center[1]-x_offset)/square_size)
         return (letter, number)
+    
+    def get_legal_moves(fen_state):
+        stockfish.set_fen_position(fen_state)
+        stockfish._put("go perft 1")
+        legal_moves = []
+        while True:
+            l = stockfish._read_line()
+            if(l[0:4] == "Node"):
+                return False
+            else:
+                move = l[0:4]
+                legal_moves += [str(move)]
+                    return True
+        return legal_moves
 
 
     def grab_piece(self):
