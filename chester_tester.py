@@ -37,6 +37,7 @@ signal.signal(signal.SIGINT, signal_handler)
 player = input("Would you like to play white or black pieces? (Type w or b)")
 print("Standby...")
 current = chester.calculate_fen_position()        #This takes a picture and analyzes it, then generates the fen position of the board and returns it as a string
+print(current)
 # while True:
 #     move = input("Enter a square to move to: ")
 #     if(move == "grab"):
@@ -68,6 +69,8 @@ current = chester.calculate_fen_position()        #This takes a picture and anal
 #     chester.move_piece(move)
 #     input("Make your move, then press Enter")
 
+# pictures = [cv.imread("Q1.jpg"), cv.imread("Q2.jpg"), cv.imread("Q3.jpg") ,cv.imread("Q4.jpg")]
+# print(chester.get_img_pieces(pictures))
 
 chester.move_to_z(chester.grab_height)
 ser.close()

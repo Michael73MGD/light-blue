@@ -31,14 +31,14 @@ def undistort(img):
     undistorted_img = cv.remap(img, map1, map2, interpolation=cv.INTER_LINEAR, borderMode=cv.BORDER_CONSTANT)    
     return undistorted_img
 
-def extract_HSV_channels(img):
+def extract_HSV_channels(img, suffix=""):
     H = img[:, :, 0]
     S = img[:, :, 1]
     V = img[:, :, 2]
 
-    cv.imwrite('cv_test/H.jpg', H)
-    cv.imwrite('cv_test/S.jpg', S)
-    cv.imwrite('cv_test/V.jpg', V)
+    cv.imwrite(f'cv_test/H{suffix}.jpg', H)
+    cv.imwrite(f'cv_test/S{suffix}.jpg', S)
+    cv.imwrite(f'cv_test/V{suffix}.jpg', V)
 
 def draw_grid(img, x_offset, y_offset, square_size):
     for i in range(5):
@@ -66,17 +66,18 @@ def crop_quadrant(img, x_offset, y_offset, square_size):
 
 
 def get_contours(img, c_range):
-    min_size = 400
+    min_size = 200
 
     hsv = cv.cvtColor(img, cv.COLOR_BGR2HSV)
     extract_HSV_channels(hsv)
     mask = cv.inRange(hsv, c_range[0], c_range[1])
     contours, hierarchy = cv.findContours(mask, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
+    retc = []
     for i, c in enumerate(contours):
-        if(cv.contourArea(c) < min_size):
-            del contours[i]
+        if(cv.contourArea(c) > min_size):
+            retc.append(c)
     
-    return contours
+    return retc
 
 def get_centroid(contour):
     M = cv.moments(contour)
@@ -94,19 +95,19 @@ s_s = 110
 
 S_mask = [(0, 50, 0), (255, 255, 255)]
 light_blue = [(105, 130, 130), (115, 190, 190)]
-red = [(175, 125, 80), (185, 160, 120)]
-dark_blue = [(110, 140, 75), (120, 195, 125)]
-orange = [(0, 125, 125), (5, 180, 180)]
-yellow = [(15, 130, 120), (30, 170, 195)]
-green = [(83, 60, 90), (100, 115, 150)]
+red = [(170, 70, 20), (185, 170, 120)]
+dark_blue = [(105, 70, 20), (120, 195, 125)]
+orange = [(0, 120, 80), (5, 200, 210)]
+yellow = [(15, 90, 120), (30, 170, 195)]
+green = [(75, 60, 50), (100, 160, 150)]
 
 
 
-img = cv.imread("Q1.jpg")
-#hsv = cv.cvtColor(crop_quadrant(img, x_o, y_o, s_s), cv.COLOR_BGR2HSV)
-#mask = cv.inRange(hsv, green[0], green[1])
-#img = cv.bitwise_and(hsv, hsv, mask=mask)
-img = draw_grid(img, x_o, y_o, s_s)
+img = cv.imread("cntr2.jpg")
+hsv = cv.cvtColor(img, cv.COLOR_BGR2HSV)
+mask = cv.inRange(hsv, S_mask[0], S_mask[1])
+img = cv.bitwise_and(hsv, hsv, mask=mask)
+#img = draw_grid(img, x_o, y_o, s_s)
 #img = crop_quadrant(img, x_o, y_o, s_s)
-#extract_HSV_channels(img)
+extract_HSV_channels(img)
 cv.imwrite("grid2.jpg", img)
