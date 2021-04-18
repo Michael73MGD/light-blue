@@ -60,7 +60,7 @@ while(not winner):
     potential_moves = chester.get_legal_moves(FEN)
 
     @app.route("/chester")
-        def bootstrapTest():
+    def bootstrapTest():
         #return render_template("bootstrapTest.html")
         return render_template('bootstrapTest.html', FEN=FEN)   #{{FEN}}
 
